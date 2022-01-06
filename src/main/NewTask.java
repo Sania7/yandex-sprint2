@@ -11,19 +11,19 @@ public class NewTask {
         return ID;
     } // метод генерации ID
 
-    Scanner scanner = new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
 
-    public String nameTask() {
+    public static String nameTask() {
         System.out.println("Введите название новой задачи!");
         return scanner.next();
     } // метод создания имени задачи
 
-    public String taskDescription() {
+    public static String taskDescription() {
         System.out.println("Опишите задачу.");
         return scanner.next();
     } // метод описания задачи
 
-    public String setTaskStatus() {
+    public static String setTaskStatus() {
         System.out.println("Установите статус для задачи...");
         System.out.println("1 - Новая, 2 - В процессе, 3 - Завершенная.");
         String status = "";
