@@ -1,4 +1,4 @@
-package main;
+package main.controller;
 
 import main.task.Epic;
 import main.task.Task;
@@ -7,8 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Manager {
-    private HashMap<Integer, Task> singleTask = new HashMap<>(); // список для Task
 
+    // список для Task
+    private HashMap<Integer, Task> singleTask = new HashMap<>();
+
+    // добавление задачи
     public void addTask(Task task) {
         for (Integer integer : singleTask.keySet()) {
             if (task.getId() == integer) {
@@ -17,16 +20,18 @@ public class Manager {
                 singleTask.put(task.getId(), task);
             }
         }
-    } // добавление задачи
+    }
 
+    // получить список всех задач
     public ArrayList<Task> getListTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
         for (Task value : singleTask.values()) {
             tasks.add(value);
         }
         return tasks;
-    } // получить список всех задач
+    }
 
+    // получение задачи по ID
     public Task getTaskId(int id) {
         for (Integer integer : singleTask.keySet()) {
             if (integer == id) {
@@ -34,8 +39,9 @@ public class Manager {
             }
         }
         return singleTask.get(id);
-    } // получение задачи по ID
+    }
 
+    // обновление задачи
     public void taskUpdate(Task task, int id) {
         if (task == null) {
             System.out.println("Такой задачи нет...");
@@ -49,12 +55,14 @@ public class Manager {
             }
 
         }
-    } // обновление задачи
+    }
 
+    // удалить все задачи
     public void deleteTask() {
         singleTask.clear();
-    } // удалить все задачи
+    }
 
+    // удаление задачи по ID
     public void removeTaskId(int id) {
         for (Integer integer : singleTask.keySet()) {
             if (integer == id) {
@@ -62,10 +70,12 @@ public class Manager {
                 return;
             }
         }
-    } // удаление задачи по ID
+    }
 
-    private HashMap<Integer, Epic> epicTask = new HashMap<>(); // список для Epic
+    // список для Epic
+    private HashMap<Integer, Epic> epicTask = new HashMap<>();
 
+    // добавление Epic
     public void addEpic(Epic epic) {
         for (Integer integer : epicTask.keySet()) {
             if (epic.getId() == integer) {
@@ -74,16 +84,18 @@ public class Manager {
                 epicTask.put(epic.getId(), epic);
             }
         }
-    } // добавление Epic
+    }
 
+    // получить список Epic
     public ArrayList<Epic> getEpicList() {
         ArrayList<Epic> listEpic = new ArrayList<>();
         for (Epic value : epicTask.values()) {
             listEpic.add(value);
         }
         return listEpic;
-    } // получить список Epic
+    }
 
+    // получить Epic по id
     public Epic getEpicId(int id) {
         for (Integer integer : epicTask.keySet()) {
             if (integer == id) {
@@ -91,8 +103,9 @@ public class Manager {
             }
         }
         return epicTask.get(id);
-    } // получить Epic по id
+    }
 
+    // обновление задачи по ID
     public void epicUpdate(Epic epic, int id) {
         if (epic != null) {
             for (Integer integer : epicTask.keySet()) {
@@ -104,12 +117,14 @@ public class Manager {
         } else {
             System.out.println("Нет такой задачи!");
         }
-    } // обновление задачи по ID
+    }
 
+    // удалить все задачи
     public void deleteEpic() {
         epicTask.clear();
-    } // удалить все задачи
+    }
 
+    // удалить Epic по ID
     public void epicRemoveId(int id) {
         for (Integer integer : epicTask.keySet()) {
             if (integer == id) {
@@ -117,5 +132,5 @@ public class Manager {
                 return;
             }
         }
-    } // удалить Epic по ID
+    }
 }

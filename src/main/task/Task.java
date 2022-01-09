@@ -1,10 +1,12 @@
 package main.task;
 
-import main.TaskStatus;
+import main.controller.TaskStatus;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Task {
+
     // переменные
     private String name;
     private String description;
@@ -56,11 +58,23 @@ public class Task {
         return id == task.id && Objects.equals(name, task.name) && Objects.equals(description, task.description) && status == task.status;
     }
 
+
+    // hashCode переопределен
     @Override
     public int hashCode() {
-        return Objects.hash(name, description, id, status);
+        int hash = 17;
+        if (name != null) {
+            hash = hash + name.hashCode();
+        }
+        hash *= 31;
+        if (description != null) {
+            hash = hash + description.hashCode();
+        }
+        return hash;
     }
 
+
+    // метод toString
     @Override
     public String toString() {
         return "Task{" +
@@ -69,5 +83,5 @@ public class Task {
                 ", id=" + id +
                 ", status=" + status +
                 '}';
-    } // метод toString
+    }
 }

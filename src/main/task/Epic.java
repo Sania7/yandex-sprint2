@@ -5,26 +5,32 @@ import java.util.HashMap;
 
 public class Epic extends Task {
 
+    // поле-список с айдишниками сабтасок этого эпика, или я что то не понимаю???
     private HashMap<Integer, SubTask> subtasks = new HashMap<>();
 
+    // конструктор
     public Epic(int id) {
         super(id);
-    } // конструктор
+    }
 
+    // геттер
     public HashMap<Integer, SubTask> getSubtasks() {
         return subtasks;
-    } // геттер
+    }
 
+    // сеттер
     public void setSubtasks(HashMap<Integer, SubTask> subtasks) {
         this.subtasks = subtasks;
-    } // сеттер
+    }
 
+    // получение списка всех подзадач
     public ArrayList<SubTask> getListSubTasks() {
         ArrayList<SubTask> listSubTasks = new ArrayList<>();
         listSubTasks.addAll(subtasks.values());
         return listSubTasks;
-    } // получение списка всех подзадач
+    }
 
+    // получение подзадачи по идентефикатору
     public Task getTaskById(int id) {
         for (Integer integer : subtasks.keySet()) {
             if (id == integer) {
@@ -32,8 +38,9 @@ public class Epic extends Task {
             }
         }
         return subtasks.get(id);
-    } // получение подзадачи по идентефикатору
+    }
 
+    // метод обновления задачи
     public void taskUpdate(SubTask subTask, int id) {
         if (subTask == null) {
             System.out.println("Нет задания!");
@@ -46,12 +53,14 @@ public class Epic extends Task {
                 System.out.println("Такой задачи нет!");
             }
         }
-    } // метод обновления задачи
+    }
 
+    // очистить всё
     public void remTaskById() {
         subtasks.clear();
-    } // очистить всё
+    }
 
+    // удаление подзадачи по id
     public void deleteTaskById(int id) {
         for (Integer integer : subtasks.keySet()) {
             if (id == integer) {
@@ -61,5 +70,5 @@ public class Epic extends Task {
                 System.out.println("Нет такой задачи!");
             }
         }
-    } // удаление подзадачи по id
+    }
 }

@@ -1,4 +1,4 @@
-package main;
+package main.controller;
 
 import java.util.Scanner;
 
@@ -6,23 +6,27 @@ public class NewTask {
 
     private static int ID = 0;
 
+    // метод генерации ID
     public int generateID() {
         ID++;
         return ID;
-    } // метод генерации ID
+    }
 
     static Scanner scanner = new Scanner(System.in);
 
+    // метод создания имени задачи
     public static String nameTask() {
         System.out.println("Введите название новой задачи!");
         return scanner.next();
-    } // метод создания имени задачи
+    }
 
+    // метод описания задачи
     public static String taskDescription() {
         System.out.println("Опишите задачу.");
         return scanner.next();
-    } // метод описания задачи
+    }
 
+    // метод присвоения статуса задаче
     public static String setTaskStatus() {
         System.out.println("Установите статус для задачи...");
         System.out.println("1 - Новая, 2 - В процессе, 3 - Завершенная.");
@@ -43,6 +47,6 @@ public class NewTask {
                 System.out.println("Нет такой команды!");
         }
         return status;
-    } // метод присвоения статуса задаче
+    }
 
 }
