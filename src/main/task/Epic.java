@@ -5,7 +5,8 @@ import java.util.HashMap;
 
 public class Epic extends Task {
 
-    // поле-список с айдишниками сабтасок этого эпика, или я что то не понимаю???
+    // поле-список с айдишниками сабтасок этого эпика, или я что то не понимаю??? подскажите
+    // если что не так??
     private HashMap<Integer, SubTask> subtasks = new HashMap<>();
 
     // конструктор
