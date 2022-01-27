@@ -1,20 +1,21 @@
 package main.task;
 
+import main.util.TaskStatus;
+
 import java.util.Objects;
 
 public class SubTask extends Task {
 
     // ссылка на Epic
-    private int epic;
+    Epic epic;
 
     // конструктор
-
-    public SubTask(int id, int epic) {
-        super(id);
+    public SubTask(String name, String description, int id, Epic epic) {
+        super(name, description, id);
         this.epic = epic;
     }
 
-    public int getEpic() {
+    public Epic getEpic() {
         return epic;
     }
 

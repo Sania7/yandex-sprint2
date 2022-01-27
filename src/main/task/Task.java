@@ -1,18 +1,22 @@
 package main.task;
 
-import main.controller.TaskStatus;
+import main.util.TaskStatus;
 
 import java.util.Objects;
 
 public class Task {
 
     // переменные
-    private String name;
-    private String description;
-    private int id;
-    private TaskStatus status;
+    private String name;   // название
+    private String description;   // описание
+    private int id;   // уникальный номер
+    private TaskStatus status;  // статус
 
-    public Task(int id) { // конструктор
+
+    // Конструктор
+    public Task(String name, String description, int id) {
+        this.name = name;
+        this.description = description;
         this.id = id;
     }
 

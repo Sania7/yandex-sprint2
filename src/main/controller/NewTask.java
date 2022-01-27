@@ -4,14 +4,6 @@ import java.util.Scanner;
 
 public class NewTask {
 
-    private static int ID = 0;
-
-    // метод генерации ID
-    public int generateID() {
-        ID++;
-        return ID;
-    }
-
     static Scanner scanner = new Scanner(System.in);
 
     // метод создания имени задачи

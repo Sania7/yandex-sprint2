@@ -1,4 +1,4 @@
-package main.controller;
+package main.util;
 
 public enum TaskStatus {
     NEW,

@@ -1,44 +1,47 @@
-package main.controller;
-
-import main.task.Epic;
-import main.task.Task;
+package main.task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Manager {
+// Класс для управления задачами
+public class TaskManager {
 
     // список для Task
-    private HashMap<Integer, Task> singleTask = new HashMap<>();
+    private HashMap<Integer, Task> listTask;
 
-    // добавление задачи
-    public void addTask(Task task) {
-        for (Integer integer : singleTask.keySet()) {
-            if (task.getId() == integer) {
-                System.out.println("Задача с таким ID уже существует!");
-            } else {
-                singleTask.put(task.getId(), task);
-            }
-        }
+    public TaskManager() {
+        listTask = new HashMap<>();
     }
 
     // получить список всех задач
     public ArrayList<Task> getListTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
-        for (Task value : singleTask.values()) {
+        for (Task value : listTask.values()) {
             tasks.add(value);
         }
         return tasks;
     }
+    // добавление задачи
+    public void addTask(Task task) {
+        for (Integer integer : listTask.keySet()) {
+            if (task.getId() == integer) {
+                System.out.println("Задача с таким ID уже существует!");
+            } else {
+                listTask.put(task.getId(), task);
+            }
+        }
+    }
+
+    // получить список всех задач
 
     // получение задачи по ID
     public Task getTaskId(int id) {
-        for (Integer integer : singleTask.keySet()) {
+        for (Integer integer : listTask.keySet()) {
             if (integer == id) {
-                singleTask.get(id);
+                listTask.get(id);
             }
         }
-        return singleTask.get(id);
+        return listTask.get(id);
     }
 
     // обновление задачи
@@ -46,9 +49,9 @@ public class Manager {
         if (task == null) {
             System.out.println("Такой задачи нет...");
         } else {
-            for (Integer integer : singleTask.keySet()) {
+            for (Integer integer : listTask.keySet()) {
                 if (integer == id) {
-                    singleTask.put(integer, task);
+                    listTask.put(integer, task);
                     System.out.println("Задача обновлена!");
                     return;
                 }
@@ -59,14 +62,14 @@ public class Manager {
 
     // удалить все задачи
     public void deleteTask() {
-        singleTask.clear();
+        listTask.clear();
     }
 
     // удаление задачи по ID
     public void removeTaskId(int id) {
-        for (Integer integer : singleTask.keySet()) {
+        for (Integer integer : listTask.keySet()) {
             if (integer == id) {
-                singleTask.remove(id);
+                listTask.remove(id);
                 return;
             }
         }
