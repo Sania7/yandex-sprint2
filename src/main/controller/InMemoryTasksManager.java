@@ -152,15 +152,13 @@ public class InMemoryTasksManager implements TaskManager {
         }
     }
 
-    void addHistory(Task task) {
-        if (task instanceof Epic || task instanceof SubTask) {
-            taskHistory.add(task);
-        } else if (taskHistory.size() > 10) {
+    public void addHistory(Task task) {
+        if (taskHistory.size() > 10) {
             taskHistory.remove(0);
+        } else {
+            taskHistory.add(task);
         }
     }
-
-
 
     @Override
     public List<Task> history() {

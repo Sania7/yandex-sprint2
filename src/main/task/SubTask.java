@@ -1,7 +1,5 @@
 package main.task;
 
-import main.util.TaskStatus;
-
 import java.util.Objects;
 
 public class SubTask extends Task {
