@@ -9,15 +9,15 @@ public class Task {
     // переменные
     private String name;   // название
     private String description;   // описание
-    private int id;   // уникальный номер
+    private Integer id;   // уникальный номер
     private TaskStatus status;  // статус
 
-
     // Конструктор
-    public Task(String name, String description, int id) {
+    public Task(Integer id, String name, String description) {
+        this.id = id;
         this.name = name;
         this.description = description;
-        this.id = id;
+        status = TaskStatus.NEW;
     }
 
     // методы доступа (аксессоры)
@@ -37,11 +37,11 @@ public class Task {
         this.description = description;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -8,8 +8,10 @@ public class SubTask extends Task {
     Epic epic;
 
     // конструктор
-    public SubTask(String name, String description, int id, Epic epic) {
-        super(name, description, id);
+
+
+    public SubTask(Integer id, String name, String description, Epic epic) {
+        super(id, name, description);
         this.epic = epic;
     }
 

@@ -6,7 +6,8 @@ import main.task.TaskManager;
 
 // Утилитарный класс для работы с менеджерами задач
 public class Managers {
-    public static TaskManager getDefault() {
+
+    public static TaskManager getDefaultHistory() {
         return new InMemoryTasksManager();
     }
 }

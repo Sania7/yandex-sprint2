@@ -4,33 +4,58 @@ import main.task.Epic;
 import main.task.SubTask;
 import main.task.Task;
 import main.task.TaskManager;
+import main.util.InMemoryHistoryManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+// тотальный рефакторинг...
+// класс для управления задачами
 public class InMemoryTasksManager implements TaskManager {
 
-    private HashMap<Integer, Task> listTask;
-    private HashMap<Integer, Epic> epicTask;
-    private ArrayList<Task> taskHistory;
+    private HashMap<Integer, Task> listTask; // список всех задач
+    private ArrayList<Task> useTaskHistory; // список обращений к задачам
+    private InMemoryHistoryManager taskHistory;
 
+    // конструктор
     public InMemoryTasksManager() {
         listTask = new HashMap<>();
-        epicTask = new HashMap<>();
-        taskHistory = new ArrayList<>();
+        useTaskHistory = new ArrayList<>();
+        taskHistory = new InMemoryHistoryManager();
     }
 
+    // получение списка всех задач + эпик + подзадачи
     @Override
-    public ArrayList<Task> getListTasks() {
-        ArrayList<Task> tasks = new ArrayList<>();
-        for (Task value : listTask.values()) {
-            tasks.add(value);
-        }
-        return tasks;
+    public HashMap<Integer, Task> getAllListTasks() {
+        return listTask;
     }
 
-    // добавление задачи
+    // получение списка задач + эпик
+    @Override
+    public ArrayList<Task> getListTask() {
+        ArrayList<Task> rsl = new ArrayList<>();
+        for (Integer key : listTask.keySet()) {
+            if (listTask.get(key).getClass() != SubTask.class) {
+                rsl.add(listTask.get(key));
+            }
+        }
+        return rsl;
+    }
+
+    // получение списка эпиков
+    @Override
+    public ArrayList<Task> getEpics() {
+        ArrayList<Task> rsl = new ArrayList<>();
+        for (Task value : listTask.values()) {
+            if (value instanceof Epic) {
+                rsl.add(value);
+            }
+        }
+        return rsl;
+    }
+
+    // добавление новой задачи
     @Override
     public void addTask(Task task) {
         for (Integer integer : listTask.keySet()) {
@@ -42,11 +67,11 @@ public class InMemoryTasksManager implements TaskManager {
         }
     }
 
-    // получение задачи по ID
+    // получение задачи по id
     @Override
     public Task getTaskId(int id) {
-        for (Integer integer : listTask.keySet()) {
-            if (integer == id) {
+        for (Integer task : listTask.keySet()) {
+            if (task == id) {
                 listTask.get(id);
             }
         }
@@ -62,11 +87,9 @@ public class InMemoryTasksManager implements TaskManager {
             for (Integer integer : listTask.keySet()) {
                 if (integer == id) {
                     listTask.put(integer, task);
-                    System.out.println("Задача обновлена!");
                     return;
                 }
             }
-
         }
     }
 
@@ -76,7 +99,7 @@ public class InMemoryTasksManager implements TaskManager {
         listTask.clear();
     }
 
-    // удаление задачи по ID
+    // удалить задачу по id
     @Override
     public void removeTaskId(int id) {
         for (Integer integer : listTask.keySet()) {
@@ -86,83 +109,17 @@ public class InMemoryTasksManager implements TaskManager {
             }
         }
     }
-
-    // добавление Epic
-    @Override
-    public void addEpic(Epic epic) {
-        for (Integer integer : epicTask.keySet()) {
-            if (epic.getId() == integer) {
-                System.out.println("Есть такой ID.");
-            } else {
-                epicTask.put(epic.getId(), epic);
-            }
-        }
-    }
-
-    // получить список Epic
-    @Override
-    public ArrayList<Epic> getEpicList() {
-        ArrayList<Epic> listEpic = new ArrayList<>();
-        for (Epic value : epicTask.values()) {
-            listEpic.add(value);
-        }
-        return listEpic;
-    }
-
-    // получить Epic по id
-    @Override
-    public Epic getEpicId(int id) {
-        for (Integer integer : epicTask.keySet()) {
-            if (integer == id) {
-                epicTask.get(id);
-            }
-        }
-        return epicTask.get(id);
-    }
-
-    // обновление задачи по ID
-    @Override
-    public void epicUpdate(Epic epic, int id) {
-        if (epic != null) {
-            for (Integer integer : epicTask.keySet()) {
-                if (integer == id) {
-                    epicTask.put(id, epic);
-                    System.out.println("Задача обновлена!");
-                }
-            }
-        } else {
-            System.out.println("Нет такой задачи!");
-        }
-    }
-
-    // удалить все задачи
-    @Override
-    public void deleteEpic() {
-        epicTask.clear();
-    }
-
-    // удалить Epic по ID
-    @Override
-    public void epicRemoveId(int id) {
-        for (Integer integer : epicTask.keySet()) {
-            if (integer == id) {
-                epicTask.remove(integer);
-                return;
-            }
-        }
-    }
-
-    public void addHistory(Task task) {
-        if (taskHistory.size() > 10) {
+    void addHistory(Task task) {
+        if (useTaskHistory.size() > 10) {
             taskHistory.remove(0);
         } else {
             taskHistory.add(task);
         }
     }
 
+    // история просмотренных задач
     @Override
     public List<Task> history() {
-        return taskHistory;
+        return (ArrayList)taskHistory.getHistory();
     }
-
 }
